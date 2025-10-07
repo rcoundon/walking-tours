@@ -433,7 +433,7 @@ function addSummaryToPanel(route) {
       <button onclick="window.print()" style="flex: 0 1 auto; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; white-space: nowrap;">
         🖨️ Print Directions
       </button>
-      <a href="route-info.html" target="_blank" style="flex: 0 1 auto; display: inline-block; padding: 8px 16px; background: #10b981; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; white-space: nowrap;">
+      <a href="route-info.html" style="flex: 0 1 auto; display: inline-block; padding: 8px 16px; background: #10b981; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; white-space: nowrap;">
         📖 Detailed Guide
       </a>
     </div>
