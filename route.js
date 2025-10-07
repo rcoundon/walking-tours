@@ -57,6 +57,9 @@ const ui = H.ui.UI.createDefault(map, defaultLayers);
 // Hold a reference to any infobubble opened
 let bubble;
 
+// Hold a reference to the user's position marker
+let userPositionMarker = null;
+
 /**
  * Opens/Closes an infobubble
  * @param  {H.geo.Point} position     The location on the map.
@@ -71,6 +74,124 @@ function openBubble(position, text) {
     bubble.setContent(text);
     bubble.open();
   }
+}
+
+/**
+ * Gets the user's current position and displays it on the map
+ */
+function showUserPosition() {
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported by your browser");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const userLat = position.coords.latitude;
+      const userLng = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+
+      // Create a custom marker for user position (pulsing blue dot)
+      const userIcon = new H.map.Icon(
+        '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="12" cy="12" r="10" fill="#4285F4" stroke="white" stroke-width="3" opacity="0.9"/>' +
+        '<circle cx="12" cy="12" r="4" fill="white"/>' +
+        '</svg>',
+        { anchor: { x: 12, y: 12 } }
+      );
+
+      // Remove old marker if it exists
+      if (userPositionMarker) {
+        map.removeObject(userPositionMarker);
+      }
+
+      // Add new marker
+      userPositionMarker = new H.map.Marker(
+        { lat: userLat, lng: userLng },
+        { icon: userIcon }
+      );
+
+      userPositionMarker.setData(`Your Location<br>Accuracy: ${Math.round(accuracy)}m`);
+
+      userPositionMarker.addEventListener('tap', (evt) => {
+        openBubble(evt.target.getGeometry(), evt.target.getData());
+      });
+
+      map.addObject(userPositionMarker);
+
+      // Center map on user position
+      map.setCenter({ lat: userLat, lng: userLng });
+      map.setZoom(16);
+    },
+    (error) => {
+      let errorMessage = "Unable to get your location";
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          errorMessage = "Location permission denied. Please enable location access in your browser.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          errorMessage = "Location information unavailable.";
+          break;
+        case error.TIMEOUT:
+          errorMessage = "Location request timed out.";
+          break;
+      }
+      alert(errorMessage);
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+  );
+}
+
+/**
+ * Adds a "Show my position" button to the map
+ */
+function addLocateMeButton() {
+  // Create button element
+  const locateButton = document.createElement('button');
+  locateButton.innerHTML = '📍 My position';
+  locateButton.style.cssText = `
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px 16px;
+    background: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: all 0.2s;
+    white-space: nowrap;
+  `;
+
+  locateButton.addEventListener('mouseenter', () => {
+    locateButton.style.background = '#3367D6';
+    locateButton.style.boxShadow = '0 3px 8px rgba(0,0,0,0.4)';
+  });
+
+  locateButton.addEventListener('mouseleave', () => {
+    locateButton.style.background = '#4285F4';
+    locateButton.style.boxShadow = '0 2px 6px rgba(0,0,0,0.3)';
+  });
+
+  locateButton.addEventListener('click', () => {
+    locateButton.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      locateButton.style.transform = 'scale(1)';
+    }, 100);
+    showUserPosition();
+  });
+
+  // Add button to map container
+  mapContainer.style.position = 'relative';
+  mapContainer.appendChild(locateButton);
 }
 
 /**
@@ -438,6 +559,9 @@ function onSuccess(result) {
   addSummaryToPanel(route);
   addTourStopsToPanel();
   addManueversToPanel(route);
+
+  // Add the "Locate Me" button to the map
+  addLocateMeButton();
 
   // Ensure map resizes properly after all content is loaded (especially important on mobile)
   setTimeout(() => {

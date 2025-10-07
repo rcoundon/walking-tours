@@ -18,10 +18,28 @@ An interactive walking tour map featuring 22 historic Dickens-related sites in L
 
 ### Running Locally
 
-For local development, you can open `index.html` directly in your browser. The app will use the placeholder API key value.
+**Quick Start (Easiest Method):**
 
-To test with a real API key locally:
+1. Create a `.env` file in the project root:
+```bash
+HERE_MAPS_API_KEY=your-actual-api-key-here
+```
 
+2. Run the development script:
+```bash
+./dev.sh
+```
+
+This will automatically load your API key, build the project, and start a local server at http://localhost:8000
+
+**Alternative Methods:**
+
+**Option 1:** One-line command with environment variable:
+```bash
+HERE_MAPS_API_KEY="your-api-key-here" ./build.sh && cd dist && python -m http.server 8000
+```
+
+**Option 2:** Manual export and build:
 ```bash
 # Set your API key as an environment variable
 export HERE_MAPS_API_KEY="your-api-key-here"
@@ -29,12 +47,12 @@ export HERE_MAPS_API_KEY="your-api-key-here"
 # Run the build script
 ./build.sh
 
-# Serve the dist folder with any static server
+# Serve the dist folder
 cd dist
 python -m http.server 8000
-# or
-npx serve .
 ```
+
+**Option 3:** Open `index.html` directly in your browser (uses placeholder API key - won't work without a real key)
 
 Then open http://localhost:8000 in your browser.
 
