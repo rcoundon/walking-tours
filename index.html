@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Charles Dickens London Walking Tour</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        color: #333;
+        background-color: #f5f5f5;
+      }
+
+      .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 2rem;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .page-header h1 {
+        margin: 0 0 0.25rem 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .page-header p {
+        margin: 0;
+        font-size: 0.9rem;
+        opacity: 0.95;
+      }
+
+      .container {
+        display: flex;
+        height: calc(100vh - 80px);
+        gap: 0;
+      }
+
+      #map {
+        flex: 1;
+        height: 100%;
+        min-width: 60%;
+      }
+
+      #panel {
+        flex: 0 0 400px;
+        height: 100%;
+        overflow-y: auto;
+        background: white;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        padding: 0;
+      }
+
+      #panel:empty::before {
+        content: "Calculating route...";
+        display: block;
+        padding: 2rem;
+        text-align: center;
+        color: #999;
+        font-style: italic;
+      }
+
+      .directions {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .directions li {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: background-color 0.2s;
+      }
+
+      .directions li:hover {
+        background-color: #f9f9f9;
+      }
+
+      .directions li span.arrow {
+        display: inline-block;
+        min-width: 28px;
+        min-height: 28px;
+        background-image: url("https://heremaps.github.io/maps-api-for-javascript-examples/map-with-pedestrian-route-from-a-to-b/img/arrows.png");
+        background-position: 0px;
+        flex-shrink: 0;
+      }
+
+      .directions li span.depart {
+        background-position: -28px;
+      }
+
+      .directions li span.rightturn {
+        background-position: -224px;
+      }
+
+      .directions li span.leftturn {
+        background-position: -252px;
+      }
+
+      .directions li span.arrive {
+        background-position: -1288px;
+      }
+
+      /* Special styling for arrival/destination points */
+      .directions li.arrival-point {
+        background-color: #eff6ff;
+        border-left: 4px solid #3b82f6;
+        padding: 1.25rem 1.5rem;
+        margin: 0.5rem 0;
+        font-weight: 500;
+      }
+
+      .directions li.arrival-point:hover {
+        background-color: #dbeafe;
+      }
+
+      .directions li.arrival-point .stop-label {
+        color: #1e40af;
+        font-size: 1.05em;
+        margin-bottom: 0.25rem;
+      }
+
+      .directions li.arrival-point span.arrow {
+        transform: scale(1.3);
+        opacity: 1;
+      }
+
+      /* Print styles */
+      @media print {
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        body {
+          background: white;
+        }
+
+        .page-header {
+          background: #667eea !important;
+          color: white !important;
+          padding: 0.5rem 1rem;
+          page-break-after: avoid;
+        }
+
+        .page-header h1 {
+          font-size: 1.25rem;
+          margin-bottom: 0.1rem;
+        }
+
+        .page-header p {
+          font-size: 0.85rem;
+        }
+
+        .container {
+          display: block;
+          height: auto;
+        }
+
+        /* Show map for printing - full width on first page */
+        #map {
+          display: block !important;
+          width: 100% !important;
+          height: 700px !important;
+          page-break-after: always;
+          border: 2px solid #ccc;
+          margin-bottom: 1rem;
+        }
+
+        /* Make panel full width and visible */
+        #panel {
+          flex: 1;
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          box-shadow: none;
+          overflow: visible;
+          page-break-inside: avoid;
+        }
+
+        /* Summary section */
+        #panel > div:first-child {
+          page-break-after: avoid;
+        }
+
+        /* Tour stops list */
+        .stop-label {
+          page-break-inside: avoid;
+        }
+
+        /* Ensure arrival points don't break across pages */
+        .directions li.arrival-point {
+          page-break-inside: avoid;
+          page-break-after: auto;
+          border-left: 3px solid #3b82f6 !important;
+          background-color: #eff6ff !important;
+          margin: 0.5rem 0;
+        }
+
+        /* Regular direction items */
+        .directions li {
+          page-break-inside: avoid;
+          font-size: 11pt;
+          line-height: 1.4;
+        }
+
+        /* Prevent orphaned items */
+        .directions {
+          orphans: 3;
+          widows: 3;
+        }
+
+        /* Arrow icons for print */
+        .directions li span.arrow {
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+
+        /* Headers before lists */
+        h3, h4 {
+          page-break-after: avoid;
+          page-break-inside: avoid;
+        }
+
+        /* Add URLs for links */
+        a[href]:after {
+          content: " (" attr(href) ")";
+          font-size: 0.8em;
+          color: #666;
+        }
+
+        /* Hide print button when printing */
+        button, a[href="route-info.html"] {
+          display: none !important;
+        }
+
+        /* Hide map controls when printing */
+        .H_ib, .H_ui {
+          display: none !important;
+        }
+
+        /* Add page footer with page numbers */
+        @page {
+          margin: 2cm;
+          @bottom-right {
+            content: "Page " counter(page) " of " counter(pages);
+          }
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          height: auto;
+        }
+
+        #map {
+          flex: none;
+          height: 400px;
+          min-height: 400px;
+          width: 100%;
+          min-width: 100%;
+        }
+
+        #panel {
+          flex: 1;
+          width: 100%;
+          max-height: none;
+          height: auto;
+          overflow-y: visible;
+          box-shadow: none;
+        }
+
+        .page-header h1 {
+          font-size: 1.25rem;
+        }
+
+        .page-header p {
+          font-size: 0.85rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>Charles Dickens London Walking Tour</h1>
+      <p>A comprehensive walking route through 22 historic sites from Dickens's life and works</p>
+    </div>
+    
+    <div class="container">
+      <div id="map"></div>
+      <div id="panel"></div>
+    </div>
+
+    <script type="text/javascript" src='route.js'></script>
+  </body>
+</html>

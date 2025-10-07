@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Charles Dickens London Walking Tour - Route Guide</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        color: #333;
+        background-color: #f5f5f5;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .page-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 2rem;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .page-header h1 {
+        margin: 0 0 0.25rem 0;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      .page-header p {
+        margin: 0 0 0.5rem 0;
+        font-size: 0.9rem;
+        opacity: 0.95;
+      }
+
+      .back-link {
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        background: rgba(255,255,255,0.2);
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+      }
+
+      .back-link:hover {
+        background: rgba(255,255,255,0.3);
+      }
+
+      .content {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .content-inner {
+        padding: 2rem;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+      }
+
+      h2 {
+        color: #667eea;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #667eea;
+      }
+
+      h3 {
+        color: #764ba2;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      h4 {
+        color: #555;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      strong {
+        color: #333;
+      }
+
+      em {
+        color: #555;
+        font-style: italic;
+      }
+
+      ul, ol {
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 2rem 0;
+      }
+
+      .stop-number {
+        display: inline-block;
+        background: #3b82f6;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+
+      .address {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .walking-time {
+        color: #10b981;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .section-header {
+        background: #f0f0f0;
+        padding: 1rem;
+        margin: 2rem -1rem 1rem -1rem;
+        border-left: 4px solid #667eea;
+      }
+
+      @media print {
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        .page-header {
+          background: #667eea !important;
+          padding: 0.5rem 1rem;
+        }
+
+        .back-link {
+          display: none;
+        }
+
+        .content {
+          max-width: 100%;
+          margin: 0;
+          box-shadow: none;
+          border-radius: 0;
+        }
+
+        .content-inner {
+          padding: 1rem;
+        }
+
+        h2 {
+          page-break-after: avoid;
+        }
+
+        h3 {
+          page-break-after: avoid;
+        }
+
+        .section-header {
+          page-break-after: avoid;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .page-header {
+          padding: 0.75rem 1rem;
+        }
+
+        .page-header h1 {
+          font-size: 1.25rem;
+        }
+
+        .page-header p {
+          font-size: 0.85rem;
+        }
+
+        .content {
+          margin: 0.5rem;
+          padding: 0;
+        }
+
+        .content-inner {
+          padding: 1rem;
+        }
+
+        h2 {
+          font-size: 1.3rem;
+        }
+
+        h3 {
+          font-size: 1.1rem;
+        }
+
+        ul, ol {
+          margin-left: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>Charles Dickens London Walking Tour</h1>
+      <p>Comprehensive Route Guide</p>
+      <a href="index.html" class="back-link">← Back to Interactive Map</a>
+    </div>
+
+    <div class="content">
+      <div class="content-inner">
+        <h2>Tour Overview</h2>
+        <p>This walking tour follows the footsteps of Charles Dickens (1812-1870) through Victorian London, visiting locations that shaped his life and inspired his greatest novels. The route spans approximately 4 miles and takes 5-7 hours including stops.</p>
+
+        <p><strong>Important:</strong> Warren's Blacking Factory was not located on Villiers Street. The factory operated at two locations: Hungerford Stairs (beneath Charing Cross Station) and 6 Chandos Place, Covent Garden.</p>
+
+        <hr>
+
+        <div class="section-header">
+          <h2 style="margin: 0; border: none;">SECTION 1: The Strand & Covent Garden</h2>
+        </div>
+
+        <h3><span class="stop-number">1</span>Villiers Street & Warren's Blacking Factory Sites</h3>
+        <p class="address"><strong>Address:</strong> 43 Villiers Street, London WC2N 6NE<br>
+        <strong>Nearest tube:</strong> Embankment, Charing Cross</p>
+        
+        <p><strong>What You'll See:</strong> A building called "Kipling House" with a blue plaque - but this has no Dickens connection. Rudyard Kipling lived here (1889-1891).</p>
+
+        <h4>The Real Warren's Blacking Factory Locations:</h4>
+        
+        <p><strong>First Location - Hungerford Stairs (1823-1824):</strong> Beneath Charing Cross Station. The original factory site lies buried beneath the railway bridge, demolished in the 1860s. At age 11, Charles was sent to work here while his father was in Marshalsea Prison.</p>
+
+        <p><strong>Second Location - Chandos Place (January-September 1824):</strong> 6 Chandos Place (corner with Bedford Street), WC2N 4HG. A blue plaque marks where TGI Friday's now stands. Young Dickens worked in a window visible to crowds, adding public humiliation to his misery.</p>
+
+        <h3><span class="stop-number">2</span>Royal Society of Arts</h3>
+        <p class="address"><strong>Address:</strong> 8 John Adam Street, London WC2N 6EZ<br>
+        <span class="walking-time">Walking time: 3 minutes from Chandos Place</span><br>
+        <strong>Opening hours:</strong> Monday-Friday 8am-8pm; Coffee House 8:30am-5pm</p>
+
+        <p><strong>Dickens Connection:</strong> Charles Dickens was a Fellow of the RSA, serving as Vice President and on committees. The building incorporates 18 Adam Street, originally the Adelphi Tavern, mentioned in <em>The Pickwick Papers</em>.</p>
+
+        <p><strong>Architectural Gem:</strong> Designed by Robert Adam (1774), featuring original ceilings, 14 fireplaces, and the Great Room with James Barry's epic painting series.</p>
+
+        <h3><span class="stop-number">3</span>Rules Restaurant</h3>
+        <p class="address"><strong>Address:</strong> 35 Maiden Lane, Covent Garden, London WC2E 7LB<br>
+        <span class="walking-time">Walking time: 4 minutes</span><br>
+        <strong>Phone:</strong> 020 7836 5314</p>
+
+        <p><strong>Dickens Connection:</strong> Dickens was a regular patron of Rules, London's oldest restaurant (founded 1798). The Victorian atmosphere he knew is preserved in the dark wood paneling and red velvet.</p>
+
+        <h3><span class="stop-number">4</span>Bow Street</h3>
+        <p class="address"><strong>Location:</strong> Between Russell Street and Long Acre, WC2E<br>
+        <span class="walking-time">Walking time: 2 minutes</span></p>
+
+        <p><strong>Context:</strong> Home of the Bow Street Runners (Britain's first police force, c.1750) and the Magistrates' Court (1740-2006). Represents the Victorian justice system Dickens critiqued.</p>
+
+        <h3><span class="stop-number">5</span>Dickens' Magazine Offices</h3>
+        <p class="address"><strong>Address:</strong> 26 Wellington Street, Covent Garden, WC2E 7DD<br>
+        <span class="walking-time">Walking time: 1 minute</span></p>
+
+        <p><strong>Critical Site:</strong> Housed the offices of <em>All The Year Round</em> (1859-1870) and Dickens's private apartments after his separation. He worked and lived here during his final decade. A commemorative plaque marks the building.</p>
+
+        <hr>
+
+        <div class="section-header">
+          <h2 style="margin: 0; border: none;">SECTION 2: Holborn & Legal London</h2>
+        </div>
+
+        <h3><span class="stop-number">6</span>The Old Curiosity Shop</h3>
+        <p class="address"><strong>Address:</strong> 13-14 Portsmouth Street, Holborn, WC2A 2ES<br>
+        <span class="walking-time">Walking time: 12 minutes</span></p>
+
+        <p><strong>Important Note:</strong> Despite the inscription, this is NOT the shop that inspired the novel. Built c.1567, it's one of London's oldest timber-framed buildings and survived the Great Fire of 1666.</p>
+
+        <h3><span class="stop-number">7</span>Sir John Soane's Museum</h3>
+        <p class="address"><strong>Address:</strong> 13 Lincoln's Inn Fields, Holborn, WC2A 2ES<br>
+        <span class="walking-time">Walking time: 3 minutes</span><br>
+        <strong>Hours:</strong> Wednesday-Sunday 10am-5pm; FREE entry</p>
+
+        <p>Adjacent to Lincoln's Inn where Dickens's friend John Forster lived. An extraordinary museum preserved as at the architect's death in 1837.</p>
+
+        <h3><span class="stop-number">8a</span>Lincoln's Inn</h3>
+        <p class="address"><strong>Entrance:</strong> Chancery Lane or Newman's Row, WC2A 3QA<br>
+        <span class="walking-time">Walking time: 2 minutes (adjacent)</span></p>
+
+        <p><strong>Dickens Connection:</strong> Central to <em>Bleak House</em> (1852-53). The Old Hall housed the Court of Chancery that opens the novel with its famous "fog" scene. The fictional "Jarndyce and Jarndyce" case exposed legal corruption.</p>
+
+        <h3><span class="stop-number">8b</span>Gray's Inn</h3>
+        <p class="address"><strong>Entrance:</strong> Lady Hale Gate, High Holborn, WC1X 8JB<br>
+        <span class="walking-time">Walking time: 8 minutes</span></p>
+
+        <p><strong>Personal Connection:</strong> 15-year-old Dickens worked as a junior clerk at 1 South Square, Gray's Inn (1827-1828), earning 13-15 shillings per week.</p>
+
+        <h3><span class="stop-number">9</span>Royal Courts of Justice & The Seven Stars</h3>
+        <p class="address"><strong>Royal Courts:</strong> Strand, London WC2A 2LL<br>
+        <strong>Seven Stars Pub:</strong> 53 Carey Street, WC2A 2JB<br>
+        <span class="walking-time">Walking time: 7 minutes from Gray's Inn</span></p>
+
+        <p>The Royal Courts (1882) represent the legal reform Dickens championed. The Seven Stars (1602) is the historic pub associated with the courts.</p>
+
+        <hr>
+
+        <div class="section-header">
+          <h2 style="margin: 0; border: none;">SECTION 3: Fleet Street - Journalism & Literary London</h2>
+        </div>
+
+        <h3><span class="stop-number">10</span>St Dunstan-in-the-West</h3>
+        <p class="address"><strong>Address:</strong> 186A Fleet Street, London EC4A 2HR<br>
+        <span class="walking-time">Walking time: 8 minutes</span><br>
+        <strong>Hours:</strong> Monday-Friday 10am-3pm</p>
+
+        <p>The famous clock (1671) with striking giants features in multiple Dickens novels including <em>Barnaby Rudge</em>, <em>David Copperfield</em>, and <em>Master Humphrey's Clock</em>.</p>
+
+        <h3><span class="stop-number">11</span>Ye Olde Cheshire Cheese</h3>
+        <p class="address"><strong>Address:</strong> 145 Fleet Street (entrance via Wine Office Court), EC4A 2BU<br>
+        <span class="walking-time">Walking time: 3 minutes</span><br>
+        <strong>Hours:</strong> Mon-Fri 11am-11pm; Sat noon-11pm; Sun noon-4pm</p>
+
+        <p>Dickens was a regular patron. The pub appears in <em>A Tale of Two Cities</em>. Dating from 1538, rebuilt 1667 after the Great Fire. Features sawdust floors and labyrinthine layout.</p>
+
+        <h3><span class="stop-number">12</span>Dr. Johnson's House</h3>
+        <p class="address"><strong>Address:</strong> 17 Gough Square, London EC4A 3DE<br>
+        <span class="walking-time">Walking time: 4 minutes</span><br>
+        <strong>Hours:</strong> Tuesday-Saturday 11am-5pm<br>
+        <strong>Admission:</strong> £9 adults</p>
+
+        <p>Samuel Johnson (1709-1784) compiled his Dictionary here. Both men worked in Fleet Street, Johnson a century before Dickens. Grade I listed Queen Anne townhouse.</p>
+
+        <h3><span class="stop-number">13</span>Took's Court - "Cook's Court"</h3>
+        <p class="address"><strong>Address:</strong> 15 Took's Court, London EC4A 1LB<br>
+        <span class="walking-time">Walking time: 6 minutes</span></p>
+
+        <p>In <em>Bleak House</em>, Took's Court becomes "Cook's Court" - home to law stationer Mr. Snagsby. Narrow cul-de-sac dating from c.1720.</p>
+
+        <hr>
+
+        <div class="section-header">
+          <h2 style="margin: 0; border: none;">SECTION 4: Holborn to Clerkenwell</h2>
+        </div>
+
+        <h3><span class="stop-number">14</span>Staple Inn</h3>
+        <p class="address"><strong>Address:</strong> High Holborn (south side), London WC1V 7PZ<br>
+        <span class="walking-time">Walking time: 5 minutes</span></p>
+
+        <p>Featured in <em>The Mystery of Edwin Drood</em> (1870), Dickens's final novel. Built 1585, the last surviving Inn of Chancery. Tudor timber-framed building with distinctive black-and-white façade.</p>
+
+        <h3><span class="stop-number">15</span>Furnival's Inn Site</h3>
+        <p class="address"><strong>Current Address:</strong> Holborn Bars (Prudential Building), 138-142 Holborn<br>
+        <span class="walking-time">Walking time: 2 minutes</span></p>
+
+        <p><strong>Critical Site:</strong> Completely demolished in 1897. Dickens's first independent home (1834-1837) where he wrote <em>The Pickwick Papers</em>. Blue plaque commemorates the site.</p>
+
+        <hr>
+
+        <div class="section-header">
+          <h2 style="margin: 0; border: none;">SECTION 5: Southwark - Dickens's Childhood Trauma</h2>
+        </div>
+
+        <h3><span class="stop-number">17</span>Marshalsea Prison Site</h3>
+        <p class="address"><strong>Location:</strong> Angel Place (off Borough High Street), SE1<br>
+        <strong>Nearest tube:</strong> Borough, London Bridge<br>
+        <strong>Access:</strong> FREE</p>
+
+        <p><strong>The Most Important Dickens Location in London:</strong> On February 20, 1824, John Dickens was imprisoned here for a £40 debt. 12-year-old Charles was sent to work at Warren's Blacking Factory. The original southern boundary wall still stands in Angel Place.</p>
+
+        <p><strong>Literary Impact:</strong> Central to <em>Little Dorrit</em> (1855-1857), where Amy Dorrit is born in the prison. Also influenced <em>David Copperfield</em> and <em>The Pickwick Papers</em>.</p>
+
+        <h3><span class="stop-number">18</span>The George Inn</h3>
+        <p class="address"><strong>Address:</strong> 77 Borough High Street, Southwark, SE1 1NH<br>
+        <span class="walking-time">Walking time: 3 minutes</span><br>
+        <strong>Phone:</strong> 020 7407 2056</p>
+
+        <p><strong>London's Only Surviving Galleried Coaching Inn:</strong> Grade I listed, owned by National Trust. Dating from 1677, features distinctive wooden galleries. Referenced in <em>Little Dorrit</em> and <em>Our Mutual Friend</em>.</p>
+
+        <h3><span class="stop-number">END</span>Borough Market</h3>
+        <p class="address"><strong>Address:</strong> 8 Southwark Street, London SE1 1TL<br>
+        <span class="walking-time">Walking time: 2 minutes</span><br>
+        <strong>Hours:</strong> Tue-Fri 10am-5pm; Sat 9am-5pm; Sun 10am-4pm; Closed Monday</p>
+
+        <p><strong>1,000 Years of History:</strong> Dating back to 1014, London's oldest food market. At its peak during Dickens's lifetime. Victorian glass and iron structures from 1851 still visible. Described in <em>Little Dorrit</em>.</p>
+
+        <hr>
+
+        <h2>Practical Information</h2>
+        
+        <p><strong>Total Distance:</strong> Approximately 4 miles (6.4 km)<br>
+        <strong>Total Walking Time:</strong> 1.5-2 hours (excluding stops)<br>
+        <strong>Recommended Tour Time:</strong> 5-7 hours including visits<br>
+        <strong>Difficulty:</strong> Easy to moderate</p>
+
+        <h3>Best Days to Visit</h3>
+        <ul>
+          <li><strong>Tuesday-Friday:</strong> Ideal - all sites accessible, less crowded</li>
+          <li><strong>Saturday:</strong> Borough Market at its liveliest but most crowded</li>
+          <li><strong>Avoid:</strong> Monday (Borough Market closed)</li>
+        </ul>
+
+        <h3>Essential Items</h3>
+        <ul>
+          <li>Comfortable walking shoes</li>
+          <li>Camera for plaques and architecture</li>
+          <li>Cash and card</li>
+          <li>Water bottle</li>
+          <li>Oyster card for tube</li>
+        </ul>
+
+        <h3>Estimated Costs</h3>
+        <p>Most locations are free. Paid admission: Dr. Johnson's House (£9). Total estimated cost including one meal: £20-50 per person.</p>
+
+        <p style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #ddd;">
+          <a href="index.html" class="back-link">← Back to Interactive Map</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

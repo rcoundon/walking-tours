@@ -1,0 +1,20 @@
+# Netlify Build Configuration
+
+[build]
+  # Command to run on each build
+  command = "./build.sh"
+
+  # Directory with the deployed files
+  publish = "dist"
+
+# Production context (default)
+[context.production]
+  command = "./build.sh"
+
+# Deploy Preview context (for pull requests)
+[context.deploy-preview]
+  command = "./build.sh"
+
+# Branch Deploy context (for non-production branches)
+[context.branch-deploy]
+  command = "./build.sh"
