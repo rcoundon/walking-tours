@@ -29,17 +29,17 @@ const tourStops = [
 ];
 
 // Set up containers for the map + panel
-let mapContainer = document.getElementById("map"),
+const mapContainer = document.getElementById("map"),
   routeInstructionsContainer = document.getElementById("panel");
 
 // Step 1: initialize communication with the platform
-let platform = new H.service.Platform({
+const platform = new H.service.Platform({
   apikey: "HERE_MAPS_API_KEY",
 });
-let defaultLayers = platform.createDefaultLayers();
+const defaultLayers = platform.createDefaultLayers();
 
 // Step 2: initialize a map - centered on London
-let map = new H.Map(mapContainer, defaultLayers.vector.normal.map, {
+const map = new H.Map(mapContainer, defaultLayers.vector.normal.map, {
   center: { lat: 51.510, lng: -0.110 },
   zoom: 13,
   pixelRatio: window.devicePixelRatio || 1,
@@ -49,7 +49,7 @@ let map = new H.Map(mapContainer, defaultLayers.vector.normal.map, {
 window.addEventListener("resize", () => map.getViewPort().resize());
 
 // Step 3: make the map interactive
-const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
 // Create the default UI components
 const ui = H.ui.UI.createDefault(map, defaultLayers);
@@ -199,7 +199,7 @@ function addLocateMeButton() {
  * @param {Object} route A route as received from the H.service.RoutingService
  */
 function addRouteShapeToMap(route) {
-  let allCoordinates = [];
+  const allCoordinates = [];
   
   route.sections.forEach((section) => {
     // Decode LineString from the flexible polyline
@@ -303,7 +303,7 @@ function addTourStopMarkers() {
  * @param {Object} route  A route as received from the H.service.RoutingService
  */
 function addManueversToMap(route) {
-  let svgMarkup =
+  const svgMarkup =
       '<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg">' +
       '<circle cx="8" cy="8" r="8" fill="#1b468d" stroke="white" stroke-width="1"/>' +
       '</svg>',
@@ -380,10 +380,10 @@ function addTourStopsToPanel() {
     label.style.minWidth = "35px";
     label.style.fontWeight = "bold";
     label.style.color = index === 0 ? "#10b981" : index === tourStops.length - 1 ? "#ef4444" : "#3b82f6";
-    label.textContent = stop.label + ".";
+    label.textContent = `${stop.label}.`;
     
     const name = document.createElement("span");
-    name.textContent = " " + stop.name.replace(/^\d+[ab]?\.\s*/, "").replace(/^(START|END)\s*-\s*/, "");
+    name.textContent = ` ${stop.name.replace(/^\d+[ab]?\.\s*/, "").replace(/^(START|END)\s*-\s*/, "")}`;
     
     li.appendChild(label);
     li.appendChild(name);
@@ -410,7 +410,7 @@ function addSummaryToPanel(route) {
     duration += section.travelSummary.duration;
   });
 
-  let summaryDiv = document.createElement("div");
+  const summaryDiv = document.createElement("div");
   summaryDiv.style.fontSize = "small";
   summaryDiv.style.marginLeft = "5%";
   summaryDiv.style.marginRight = "5%";
@@ -476,7 +476,7 @@ function addManueversToPanel(route) {
       const spanArrow = document.createElement("span");
       const spanInstruction = document.createElement("span");
 
-      spanArrow.className = "arrow " + (action.direction || "") + action.action;
+      spanArrow.className = `arrow ${action.direction || ""}${action.action}`;
       
       // Check if this is an arrival action
       if (action.action === "arrive") {
@@ -488,7 +488,7 @@ function addManueversToPanel(route) {
           const stopLabel = document.createElement("div");
           stopLabel.className = "stop-label";
           stopLabel.innerHTML = `<strong>${stop.label}. ${stop.name.replace(/^\d+[ab]?\.\s*/, "").replace(/^(START|END)\s*-\s*/, "")}</strong>`;
-          spanInstruction.innerHTML = stopLabel.outerHTML + "<br>" + action.instruction;
+          spanInstruction.innerHTML = `${stopLabel.outerHTML}<br>${action.instruction}`;
           waypointIndex++;
         } else {
           spanInstruction.innerHTML = action.instruction;
